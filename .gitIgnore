@@ -1,0 +1,5 @@
+/backend/config/config.env
+/frontend
+/.vscode
+/node_modules
+/package-lock.json
