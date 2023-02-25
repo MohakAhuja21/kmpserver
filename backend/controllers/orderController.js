@@ -1,10 +1,10 @@
-const catchAsyncError = require("../middleWare/catchAsyncError");
 const Payment = require("../models/Payment");
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const crypto = require("crypto");
 const Order = require("../models/Order");
 const razorpay = require("../config/razorpay");
+const { catchAsyncError } = require("../middleware/catchAsyncError");
 
 // Create new Order >> imported in orderRoute.js
 exports.placeOrder = catchAsyncError(async (req, res, next) => {

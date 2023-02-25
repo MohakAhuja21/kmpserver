@@ -2,7 +2,7 @@
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const ApiFeatures = require("../utils/apifeatures");
-const catchAsyncError = require("../middleWare/catchAsyncError");
+const { catchAsyncError } = require("../middleware/catchAsyncError");
 
 //postman CREATE A PRODUCT //admin
 // importing this is productRoute
