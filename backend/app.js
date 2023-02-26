@@ -7,7 +7,7 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 const passport = require("passport");
 const morgan = require('morgan');
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
+// const MongoStore = require('connect-mongo');
 // const helmet = require("helmet");
 
 const app = express();
@@ -24,16 +24,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.DB_URI,
-    }),
 
     cookie: {
       secure: process.env.NODE_ENV === "development" ? false : true,
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
       sameSite: process.env.NODE_ENV === "development" ? false : "none",
     },
-
   })
 );
 // use this cookieParser before passport step only.
@@ -41,12 +37,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({extended: true,}));
 
-
 // after using session. Then only we can begin with this step
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use(
   cors({
@@ -57,7 +51,6 @@ app.use(
 );
 app.use(morgan("dev"));
 // app.use(helmet());
-
 
 // importing and using routes
 const productRoute = require("./routes/productRoute");
