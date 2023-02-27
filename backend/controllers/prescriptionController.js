@@ -22,7 +22,7 @@ exports.uploadPrescription = catchAsyncError(async (req, res, next) => {
 
   // Create a new Prescription document in the database
   const prescription = await Prescription.create({
-    user: req.user._id,
+    // user: req.user._id,
     image: {
       public_id: result.public_id,
       url: result.secure_url,
