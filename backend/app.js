@@ -55,11 +55,13 @@ connectPassport();
 const productRoute = require("./routes/productRoute");
 const orderRoute = require("./routes/orderRoute");
 const authRoute= require("./routes/authRoute");
+const prescriptionRoute = require('./routes/prescriptionRoute');
 
 // api
 app.use("/api/v1", productRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", authRoute);
+app.use("/api/v1", prescriptionRoute);
 
 app.use(errorMiddleware);
 

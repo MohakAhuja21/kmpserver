@@ -28,13 +28,4 @@ router
 
 router.route("/product/:id").get(getProductDetails);
 
-router.route("/review").put(createProductReview);
-
-router
-  .route("/reviews")
-  // in getProductReviews we can add . So that first after logging in only we can see product review. Here we have not done that because we want anyone to see ratings and reviews even if they are not logged in.!
-  .get(getProductReviews)
-  .delete(deleteReview);
-
-
 module.exports = router;
