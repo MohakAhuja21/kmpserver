@@ -1,6 +1,10 @@
 const Prescription = require('../models/Prescription');
 const cloudinary = require('cloudinary');
 const { catchAsyncError } = require("../middleware/catchAsyncError");
+const dotenv = require("dotenv");
+
+// config
+dotenv.config({ path: "backend/config/config.env" });
 
 // Cloudinary configuration
 cloudinary.config({
