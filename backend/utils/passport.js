@@ -7,7 +7,7 @@ const User = require("../models/User");
 // config
 dotenv.config({ path: "backend/config/config.env" });
 
-const connectPassport = () => {
+exports.connectPassport = () => {
 passport.use(
   new GoogleStrategy(
     {
@@ -45,4 +45,4 @@ passport.serializeUser((user, done) => {
 }
 
 // importing in app.js
-module.exports = connectPassport;
+// module.exports =connectPassport();

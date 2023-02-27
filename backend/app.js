@@ -8,15 +8,21 @@ const passport = require("passport");
 const morgan = require('morgan');
 const session = require("express-session");
 // const MongoStore = require('connect-mongo');
-// const helmet = require("helmet");
+const {connectPassport} = require("./utils/passport");
 
 const app = express();
-// FOR DEPLOYMENT and storing cookies in browser tab(imp*)
-app.set('trust proxy', true);
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // config
 dotenv.config({ path: "backend/config/config.env" });
 
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 // connecting middleware // change secret to process.env.SESSION_SECRET, if not facing any problem
 app.use(
@@ -41,21 +47,14 @@ app.use(urlencoded({extended: true,}));
 app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.enable("trust proxy");
 
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
-app.use(morgan("dev"));
-// app.use(helmet());
+connectPassport();
 
 // importing and using routes
 const productRoute = require("./routes/productRoute");
 const orderRoute = require("./routes/orderRoute");
-const authRoute= require("./routes/authRoute")
+const authRoute= require("./routes/authRoute");
 
 // api
 app.use("/api/v1", productRoute);

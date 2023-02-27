@@ -2,7 +2,7 @@ const app = require("./app");
 const dotenv = require("dotenv");
 // const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
-const connectPassport= require("./utils/passport")
+
 
 // handling uncaught exception
 process.on("uncaughtException", (err) => {
@@ -16,10 +16,6 @@ dotenv.config({ path: "backend/config/config.env" });
 
 // connect to database > mongoDb
 connectDatabase();
-// google auth
-connectPassport();
-
-// module.exports = razorpay;
 
 // cloudinary.config({
 //     cloud_name: process.env.CLOUDINARY_NAME,
@@ -28,9 +24,9 @@ connectPassport();
 //     // secure: true,
 //   });
 
-app.get("/",(req,res,next)=>{
-  res.send("<h1>Backend Working !</h1>")
-})
+app.get("/", (req, res, next) => {
+  res.json({ message: "Backend Working!" });
+});
 
 const server = app.listen(process.env.PORT, () => {
   console.log(`server is working on PORT: ${process.env.PORT}`);
