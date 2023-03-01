@@ -10,12 +10,9 @@ const { catchAsyncError } = require("../middleware/catchAsyncError");
 exports.placeOrder = catchAsyncError(async (req, res, next) => {
   const {
     shippingInfo,
-    orderItems,
     paymentMethod,
-    itemsPrice,
-    taxPrice,
-    shippingCharges,
-    totalAmount,
+    cartItems,
+    cartGrossTotal,
   } = req.body;
 
   // we are using here "" just for postman post request purposes/.
@@ -24,12 +21,9 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
 
   const orderOptions = {
     shippingInfo,
-    orderItems,
     paymentMethod,
-    itemsPrice,
-    taxPrice,
-    shippingCharges,
-    totalAmount,
+    cartItems,
+    cartGrossTotal,
     user,
   };
   await Order.create(orderOptions);
@@ -43,12 +37,9 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
 exports.placeOrderOnline = catchAsyncError(async (req, res, next) => {
   const {
     shippingInfo,
-    orderItems,
     paymentMethod,
-    itemsPrice,
-    taxPrice,
-    shippingCharges,
-    totalAmount,
+    cartItems,
+    cartGrossTotal,
   } = req.body;
 
   // const user = "req.user._id";
@@ -56,12 +47,9 @@ exports.placeOrderOnline = catchAsyncError(async (req, res, next) => {
 
   const orderOptions = {
     shippingInfo,
-    orderItems,
     paymentMethod,
-    itemsPrice,
-    taxPrice,
-    shippingCharges,
-    totalAmount,
+    cartItems,
+    cartGrossTotal,
     user,
   };
 
