@@ -5,14 +5,10 @@ const {
   updateProduct,
   deleteProduct,
   getProductDetails,
-  createProductReview,
-  getProductReviews,
-  deleteReview,
 } = require("../controllers/productController");
 
 const router = express.Router();
 
-// router.route("/products").get(getAllProducts);
 router.get("/products",getAllProducts);
 
 // auth.js for creating Product

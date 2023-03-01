@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const prescriptionSchema = new mongoose.Schema(
   {
     user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
       required: true,
     },
     image: {
@@ -17,6 +17,4 @@ const prescriptionSchema = new mongoose.Schema(
   }
 );
 
-const Prescription = mongoose.model('Prescription', prescriptionSchema);
-
-module.exports = Prescription;
+module.exports = mongoose.model("Prescription", prescriptionSchema);

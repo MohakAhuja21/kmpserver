@@ -32,10 +32,6 @@ const productSchema =new mongoose.Schema
     required: [true, "Please Enter product Price"],
     maxLength: [8, "Price cannot exceed 8 characters"],
   },
-  // ratings: {
-  //   type: Number,
-  //   default: 0,
-  // },
 // WE WILL BE USING CLOUDINARY FOR STORING IMAGES.
   images: [
     {
@@ -56,35 +52,9 @@ const productSchema =new mongoose.Schema
   Stock: {
     type: Number,
     // required: [true, "Please Enter product Stock"],
-    // maxLength: [4, "Stock cannot exceed 4 characters"],
+    // maxLength: [3, "Stock cannot exceed 3 characters"],
     // default: 70,
   },
-  // numOfReviews: {
-  //   type: Number,
-  //   default: 0,
-  // },
-  // reviews: [
-  //   {
-  //     user: {
-  //       type: mongoose.Schema.ObjectId,
-  //       ref: "User",
-  //       required: true,
-  //     },
-  //     name: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     rating: {
-  //       type: Number,
-  //       required: true,
-  //     },
-  //     comment: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //   },
-  // ],
-
   // we are commenting user for now/
   // user: {
   //   type: mongoose.Schema.ObjectId,
@@ -95,7 +65,6 @@ const productSchema =new mongoose.Schema
   //   type: Date,
   //   default: Date.now,
   // },
-  
 });
 
 // importing in productController.
