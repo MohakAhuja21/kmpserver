@@ -7,7 +7,7 @@ const errorMiddleware = require("./middleware/errorMiddleware");
 const passport = require("passport");
 const morgan = require('morgan');
 const session = require("express-session");
-// const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const {connectPassport} = require("./utils/passport");
 
 const app = express();
@@ -30,7 +30,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URI,
+      autoReconnect: true,
+      collectionName: "sessions",
+    }),
     cookie: {
       secure: process.env.NODE_ENV === "development" ? false : true,
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
