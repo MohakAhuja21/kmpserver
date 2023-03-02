@@ -23,35 +23,38 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
 // postman GET ALL PRODUCT
 // exports.getAllProducts = catchAsyncError(async (req, res) => {
-exports.getAllProducts = catchAsyncError(async (req, res) => {
-  // pagination
-  // no of products to to be displayed per page. Importing in apiFeatures.js
-  const resultPerPage = 12;
-  const productsCount = await Product.countDocuments();
-
-  // adding-> search,filters to product
-  const apiFeatures = new ApiFeatures(Product.find(), req.query)
-    .search()
-    .filter()
-
+  exports.getAllProducts = catchAsyncError(async (req, res) => {
+    // pagination
+    // no of products to to be displayed per page. Importing in apiFeatures.js
+    const resultPerPage = 12;
+    const productsCount = await Product.countDocuments();
+  
+    const apiFeatures = new ApiFeatures(Product.find(), req.query)
+      .search()
+      .filter();
+  
     let products = await apiFeatures.query;
-
-    let filteredProductsCount = products.length;
+  
+    if (products.length === 0 && req.query.page && req.query.page > 1) {
+      req.query.page = 1;
+      apiFeatures.search().filter();
+      products = await apiFeatures.query;
+    }
+  
+    const filteredProductsCount = products.length;
   
     apiFeatures.pagination(resultPerPage);
   
     products = await apiFeatures.query.clone();
-
-  res.status(200).json({
-    success: true,
-    // using below in productAction in frontend.
-    products,
-    productsCount,
-    // products.js>pagination
-    resultPerPage,
-    filteredProductsCount
+  
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultPerPage,
+      filteredProductsCount,
+    });
   });
-});
 
 // update product //admin
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
