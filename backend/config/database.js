@@ -7,12 +7,8 @@ const connectDatabase = () => {
       useUnifiedTopology: true,
     })
     .then((data) => {
-      // we can use anyName, i have used data
       console.log(`mongoDb connected with server ${data.connection.host}`);
     })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
 };
 
 module.exports = connectDatabase;
